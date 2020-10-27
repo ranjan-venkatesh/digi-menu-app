@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Welcome to Qnips Menu</title>
+    <script src='content/js/angular.min.js' type='text/javascript'></script>
+    <link href="content/css/styles.css" rel="stylesheet" type="text/css"/>
+    <script src='content/js/MenuApp/configuration.js' type='text/javascript'></script>
+    <script src='content/js/MenuApp/service.js' type='text/javascript'></script>
+    <script src='content/js/MenuApp/controller.js' type='text/javascript'></script>
+    <script src='content/js/utils.js' type='text/javascript'></script>
+</head>
+
+<body ng-app="menuApp">
+<div ng-controller="menuController">
+    <table>
+        <thead>
+        <tr>
+            <th ng-repeat="week in weeks">{{week}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in menu | orderBy:'+category'">
+            <td ng-if="weeks.indexOf(key)>=0" ng-repeat="(key,val) in item" scope="row">
+                <div ng-if="$index == 0">{{ val }}</div>
+                <div ng-if="$index > 0 ">
+                    <div ng-if="!val">NA</div>
+                    <div ng-if="val" ng-repeat="subItem in val">{{subItem.productName}}<BR>{{subItem.allergenLabels}}<BR>&euro;{{subItem.price}}<BR>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
